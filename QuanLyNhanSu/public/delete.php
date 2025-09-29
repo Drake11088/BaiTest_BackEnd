@@ -1,17 +1,15 @@
 <?php
-// delete.php (safe)
-include 'db.php';
+include './../includes/db.php';
 ini_set('display_errors',1);
 error_reporting(E_ALL);
 
-// nếu request GET: show confirm page
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
     if ($id <= 0) {
         header('Location: index.php?msg=invalid_id');
         exit;
     }
-    // lấy tên để hiển thị
+    
     $stmt = $conn->prepare("SELECT ho_ten FROM nhanvien WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();

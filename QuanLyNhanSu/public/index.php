@@ -1,5 +1,5 @@
 <?php
-include_once './../includes/db.php';
+include './../includes/db.php';
 $res = $conn->query("SELECT * FROM nhanvien ORDER BY id DESC");
 ?>
 <!DOCTYPE html>

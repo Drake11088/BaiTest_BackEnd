@@ -1,9 +1,8 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-include_once '<includes>db.php';
+include './../includes/db.php';
 $errors = [];
-$conn = [];
 $old = ['ho_ten'=>'', 'chuc_vu'=>'', 'luong'=>''];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -28,9 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$stmt) {
             $errors[] = "Prepare failed: " . $conn->error;
         } else {
-            $stmt->bind_param("ssd", $old['ho_ten'], $old['chuc_vu'], $luong_val);
+           $stmt->bind_param("ssi", $old['ho_ten'], $old['chuc_vu'], $luong_val);
             if ($stmt->execute()) {
-                
                 header("Location: index.php?msg=added");
                 exit;
             } else {
@@ -61,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <input type="text" name="ho_ten" placeholder="Họ tên" required value="<?= htmlspecialchars($old['ho_ten']) ?>">
       <input type="text" name="chuc_vu" placeholder="Chức vụ" required value="<?= htmlspecialchars($old['chuc_vu']) ?>">
       <input type="number" step="0.01" name="luong" placeholder="Lương" required value="<?= htmlspecialchars($old['luong']) ?>">
-      <button type="submit" class="btn btn-add">✅ Thêm</button>
+      <button type="submit" class="btn btn-add">Thêm</button>
     </form>
 
     <br>
